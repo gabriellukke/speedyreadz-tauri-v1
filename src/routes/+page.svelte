@@ -8,9 +8,10 @@
 	let timer: NodeJS.Timeout | null = null;
 
 	function startReading() {
-		if (textInput.trim()) {
-			words = textInput.trim().split(/\s+/);
-			index = 0;
+		if (!isReading) {
+			if (textInput.trim() && index === 0) {
+				words = textInput.trim().split(/\s+/);
+			}
 			isReading = true;
 			runRSVP();
 		}
@@ -28,20 +29,20 @@
 		}, interval);
 	}
 
-	function stopReading() {
-		isReading = false;
-		if (timer !== null) {
-			clearInterval(timer);
-			timer = null;
-		}
-	}
-
 	function pauseReading() {
 		if (timer !== null) {
 			clearInterval(timer);
 			timer = null;
 		}
 		isReading = false;
+	}
+
+	function stopReading() {
+		isReading = false;
+		if (timer !== null) {
+			clearInterval(timer);
+			timer = null;
+		}
 	}
 
 	function resetReading() {
@@ -72,23 +73,24 @@
 				<input type="number" id="wpm" min="100" max="1000" bind:value={wpm} class="w-20 px-2 py-1 ml-1" />
 			</div>
 
-			<button type="button" class="btn variant-filled rounded-lg" color="primary" on:click={startReading}
-				>Start</button
-			>
 			<button
 				type="button"
 				class="btn variant-filled rounded-lg"
-				color="secondary"
-				on:click={pauseReading}
-				disabled={!isReading}>Pause</button
+				color={isReading ? 'secondary' : 'primary'}
+				on:click={isReading ? pauseReading : startReading}
 			>
+				{isReading ? 'Pause' : 'Start'}
+			</button>
+
 			<button
 				type="button"
 				class="btn variant-filled rounded-lg"
 				color="error"
 				on:click={resetReading}
-				disabled={!isReading}>Reset</button
+				disabled={!isReading && index === 0}
 			>
+				Reset
+			</button>
 		</div>
 	</div>
 </div>
