@@ -52,27 +52,26 @@
 	}
 </script>
 
-<div class="flex flex-col space-y-4 h-screen">
-	<div class="items-center justify-center">
-		<div class="text-3xl text-center py-4">
+<div class="flex h-screen">
+	<div class="flex flex-col items-center justify-center flex-grow">
+		<div class="text-3xl text-center py-4 mb-10 w-full">
 			{#if currentWord}
 				<span class="text-8xl">{currentWord}</span>
 			{:else}
 				<textarea
 					bind:value={textInput}
 					rows="10"
-					class="text-black border border-gray-300 p-2 w-1/2"
+					class="text-black border border-gray-300 p-2 w-1/2 mx-auto"
 					placeholder="Paste your text here..."
 				></textarea>
 			{/if}
 		</div>
-
-		<div class="controls flex justify-center items-center space-x-4">
+		<div class="controls flex justify-center items-center space-x-4 pb-4">
 			<div class="flex items-center text-black">
 				<label for="wpm" class="text-sm">WPM:</label>
 				<input type="number" id="wpm" min="100" max="1000" bind:value={wpm} class="w-20 px-2 py-1 ml-1" />
 			</div>
-
+	
 			<button
 				type="button"
 				class="btn variant-filled rounded-lg"
@@ -81,7 +80,7 @@
 			>
 				{isReading ? 'Pause' : 'Start'}
 			</button>
-
+	
 			<button
 				type="button"
 				class="btn variant-filled rounded-lg"
@@ -92,5 +91,5 @@
 				Reset
 			</button>
 		</div>
-	</div>
+	</div>	
 </div>
