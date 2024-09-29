@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "tauri": "tauri",
-    "tauri-build": "npm run build && tauri build",
-    "tauri-dev": "npm run dev && tauri dev",
+    "tauri-build": "tauri build",
+    "tauri-dev": "tauri dev",
     "dev": "vite dev",
     "build": "vite build",
     "preview": "vite preview",
